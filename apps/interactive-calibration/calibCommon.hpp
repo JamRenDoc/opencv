@@ -14,8 +14,8 @@
 namespace calib
 {
     #define OVERLAY_DELAY 1000
-    #define IMAGE_MAX_WIDTH 1280
-    #define IMAGE_MAX_HEIGHT 960
+    #define IMAGE_MAX_WIDTH 1920
+    #define IMAGE_MAX_HEIGHT 1080
 
     bool showOverlayMessage(const std::string& message);
 

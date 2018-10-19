@@ -98,22 +98,22 @@ void calib::calibController::updateState()
                 mCalibFlags |= cv::CALIB_ZERO_TANGENT_DIST;
         }
 
-        if(!(mCalibFlags & cv::CALIB_FIX_K1)) {
+        if(!(mCalibFlags & cv::fisheye::CALIB_FIX_K1)) {
             const double eps = 0.005;
             if(fabs(mCalibData->distCoeffs.at<double>(0)) < eps)
-                mCalibFlags |= cv::CALIB_FIX_K1;
+                mCalibFlags |= cv::fisheye::CALIB_FIX_K1;
         }
 
-        if(!(mCalibFlags & cv::CALIB_FIX_K2)) {
+        if(!(mCalibFlags & cv::fisheye::CALIB_FIX_K2)) {
             const double eps = 0.005;
             if(fabs(mCalibData->distCoeffs.at<double>(1)) < eps)
-                mCalibFlags |= cv::CALIB_FIX_K2;
+                mCalibFlags |= cv::fisheye::CALIB_FIX_K2;
         }
 
-        if(!(mCalibFlags & cv::CALIB_FIX_K3)) {
+        if(!(mCalibFlags & cv::fisheye::CALIB_FIX_K3)) {
             const double eps = 0.005;
             if(fabs(mCalibData->distCoeffs.at<double>(4)) < eps)
-                mCalibFlags |= cv::CALIB_FIX_K3;
+                mCalibFlags |= cv::fisheye::CALIB_FIX_K3;
         }
 
     }
@@ -327,7 +327,7 @@ void calib::calibDataController::printParametersToConsole(std::ostream &output) 
 
 void calib::calibDataController::updateUndistortMap()
 {
-    cv::initUndistortRectifyMap(mCalibData->cameraMatrix, mCalibData->distCoeffs, cv::noArray(),
+    cv::fisheye::initUndistortRectifyMap(mCalibData->cameraMatrix, mCalibData->distCoeffs, cv::noArray(),
                                 cv::getOptimalNewCameraMatrix(mCalibData->cameraMatrix, mCalibData->distCoeffs, mCalibData->imageSize, 0.0, mCalibData->imageSize),
                                 mCalibData->imageSize, CV_16SC2, mCalibData->undistMap1, mCalibData->undistMap2);
 
